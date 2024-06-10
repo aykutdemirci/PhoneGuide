@@ -14,9 +14,7 @@ namespace PhoneGuide.Application.Repositories
 
         Task<bool> UpdateAsync(T entity);
 
-        Task<bool> DeleteAsync(T entity);
-
-        Task<bool> DeleteByIdAsync(Guid id);
+        bool Delete(Guid id);
 
         Task<bool> DeleteRangeAsync(List<T> entities);
 
