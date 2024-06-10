@@ -2,7 +2,7 @@
 
 namespace PhoneGuide.Application.Repositories
 {
-    internal interface IContactRepository : IRepository<Contact>
+    public interface IContactRepository : IRepository<Contact>
     {
     }
 }
