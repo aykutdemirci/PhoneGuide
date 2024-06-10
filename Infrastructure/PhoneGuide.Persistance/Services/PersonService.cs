@@ -5,7 +5,7 @@ using PhoneGuide.Domain.Entities;
 
 namespace PhoneGuide.Persistance.Services
 {
-    public class PersonService : IPersonService
+    public sealed class PersonService : IPersonService
     {
         private readonly IUnitOfWork _unitOfWork;
 
