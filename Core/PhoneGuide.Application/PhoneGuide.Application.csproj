@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\Contact\" />
+    <Folder Include="Repositories\Person\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PhoneGuide.Domain\PhoneGuide.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
