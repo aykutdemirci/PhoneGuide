@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{359C2FB9-F728-4D4C-A572-170C9851172D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneGuide", "Presentation\PhoneGuide\PhoneGuide.csproj", "{F572DC70-1614-4B01-951A-BB47419946AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneGuide.API", "Presentation\PhoneGuide\PhoneGuide.API.csproj", "{F572DC70-1614-4B01-951A-BB47419946AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneGuide.Domain", "Core\PhoneGuide.Domain\PhoneGuide.Domain.csproj", "{7BE37551-84A9-44B4-9150-0A3307950F5D}"
 EndProject

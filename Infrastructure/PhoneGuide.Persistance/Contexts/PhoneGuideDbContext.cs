@@ -4,7 +4,7 @@ using PhoneGuide.Domain.Entities.Common;
 
 namespace PhoneGuide.Persistance.Contexts
 {
-    public class PhoneGuideDbContext : DbContext
+    public sealed class PhoneGuideDbContext : DbContext
     {
         public PhoneGuideDbContext(DbContextOptions options) : base(options)
         {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneGuide.Domain.Entities
 {
-    public class Contact : BaseEntity
+    public sealed class Contact : BaseEntity
     {
         public ContactTypes ContactType { get; set; }
 

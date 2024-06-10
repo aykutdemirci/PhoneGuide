@@ -2,7 +2,7 @@
 
 namespace PhoneGuide.Domain.Entities
 {
-    public class Person : BaseEntity
+    public sealed class Person : BaseEntity
     {
         public string Name { get; set; }
 
