@@ -2,7 +2,7 @@
 
 namespace PhoneGuide.Application.Dto
 {
-    public class DtoContact
+    public sealed class DtoContact
     {
         public ContactTypes ContactType { get; set; }
 
