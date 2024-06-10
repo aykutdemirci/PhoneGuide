@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhoneGuide.Domain.Entities.Common;
-using System.Linq.Expressions;
 
 namespace PhoneGuide.Application.Repositories
 {
@@ -19,8 +18,6 @@ namespace PhoneGuide.Application.Repositories
         Task<bool> DeleteRangeAsync(List<T> entities);
 
         Task<T> GetByIdAsync(Guid id);
-
-        Task<T> GetSingleAsync(Expression<Func<bool, T>> predicate);
 
         Task<IQueryable<T>> GetAllAsync(bool tracking = false);
     }

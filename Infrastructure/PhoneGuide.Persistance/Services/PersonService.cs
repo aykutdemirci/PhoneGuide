@@ -14,19 +14,19 @@ namespace PhoneGuide.Persistance.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateAsync(DtoPerson dto)
+        public async Task<bool> CreateAsync(DtoPerson person)
         {
             return await _unitOfWork.PersonRepository.AddAsync(new Person
             {
-                Name = dto.Name,
-                Company = dto.Company,
-                LastName = dto.LastName,
+                Name = person.Name,
+                Company = person.Company,
+                LastName = person.LastName,
             });
         }
 
-        public async Task<bool> CreateMultipleAsync(List<DtoPerson> dtos)
+        public async Task<bool> CreateMultipleAsync(List<DtoPerson> persons)
         {
-            return await _unitOfWork.PersonRepository.AddRangeAsync(dtos.Select(q => new Person
+            return await _unitOfWork.PersonRepository.AddRangeAsync(persons.Select(q => new Person
             {
                 Name = q.Name,
                 Company = q.Company,
@@ -37,6 +37,17 @@ namespace PhoneGuide.Persistance.Services
         public bool DeleteById(Guid id)
         {
             return _unitOfWork.PersonRepository.Delete(id);
+        }
+
+        public Task<bool> DeleteRangeAsync(List<DtoPerson> persons)
+        {
+            return _unitOfWork.PersonRepository.DeleteRangeAsync(persons.Select(q => new Person
+            {
+                Id = q.Id,
+                Name = q.Name,
+                Company = q.Company,
+                LastName = q.LastName,
+            }).ToList());
         }
 
         public async Task<List<DtoPerson>> GetAllAsync()
@@ -63,13 +74,13 @@ namespace PhoneGuide.Persistance.Services
             };
         }
 
-        public Task<bool> UpdateAsync(DtoPerson dto)
+        public Task<bool> UpdateAsync(DtoPerson person)
         {
             return _unitOfWork.PersonRepository.UpdateAsync(new Person
             {
-                Name = dto.Name,
-                Company = dto.Company,
-                LastName = dto.LastName,
+                Name = person.Name,
+                Company = person.Company,
+                LastName = person.LastName,
             });
         }
     }

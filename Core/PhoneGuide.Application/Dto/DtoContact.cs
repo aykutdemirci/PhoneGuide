@@ -4,6 +4,8 @@ namespace PhoneGuide.Application.Dto
 {
     public sealed class DtoContact
     {
+        public Guid Id { get; set; }
+
         public ContactTypes ContactType { get; set; }
 
         public string Content { get; set; }

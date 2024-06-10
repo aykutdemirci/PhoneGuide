@@ -39,6 +39,17 @@ namespace PhoneGuide.Persistance.Services
             return _unitOfWork.ContactRepository.Delete(id);
         }
 
+        public Task<bool> DeleteRangeAsync(List<DtoContact> contacts)
+        {
+            return _unitOfWork.ContactRepository.DeleteRangeAsync(contacts.Select(q => new Contact
+            {
+                Id = q.Id,
+                Content = q.Content,
+                PersonId = q.PersonId,
+                ContactType = q.ContactType,
+            }).ToList());
+        }
+
         public async Task<List<DtoContact>> GetAllAsync()
         {
             var contacts = await _unitOfWork.ContactRepository.GetAllAsync();
