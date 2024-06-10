@@ -1,10 +1,13 @@
-﻿using PhoneGuide.Domain.Entities.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneGuide.Domain.Entities.Common;
 using System.Linq.Expressions;
 
 namespace PhoneGuide.Application.Repositories
 {
     public interface IRepository<T> where T : BaseEntity
     {
+        DbSet<T> Table { get; }
+
         Task<bool> AddAsync(T entity);
 
         Task<bool> AddRangeAsync(List<T> entites);
