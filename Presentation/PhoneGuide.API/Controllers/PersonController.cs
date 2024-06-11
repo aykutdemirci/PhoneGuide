@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneGuide.Application.Abstractions.Services;
-using PhoneGuide.Application.Dto;
+using PhoneGuide.Application.Dto.Person;
 using System.Net;
 
 namespace PhoneGuide.API.Controllers

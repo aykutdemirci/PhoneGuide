@@ -1,19 +1,19 @@
-﻿using PhoneGuide.Application.Dto;
+﻿using PhoneGuide.Application.Dto.Contact;
 
 namespace PhoneGuide.Application.Abstractions.Services
 {
     public interface IContactService
     {
-        Task<bool> CreateAsync(DtoContact dtoContact);
+        Task<bool> CreateAsync(DtoCreateContact dtoContact);
 
-        Task<bool> CreateMultipleAsync(List<DtoContact> dtoContacts);
+        Task<bool> CreateMultipleAsync(List<DtoCreateContact> dtoContacts);
 
-        Task<bool> UpdateAsync(DtoContact dtoContact);
+        Task<bool> UpdateAsync(DtoUpdateContact dtoContact);
 
         Task<bool> DeleteByIdAsync(Guid id);
 
-        List<DtoContact> GetAll();
+        List<DtoCreateContact> GetAll();
 
-        Task<DtoContact> GetByIdAsync(Guid id);
+        Task<DtoCreateContact> GetByIdAsync(Guid id);
     }
 }

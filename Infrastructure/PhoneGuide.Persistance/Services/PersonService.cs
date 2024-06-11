@@ -1,6 +1,6 @@
 ﻿using PhoneGuide.Application.Abstractions.Services;
 using PhoneGuide.Application.Abstractions.UnitOfWork;
-using PhoneGuide.Application.Dto;
+using PhoneGuide.Application.Dto.Person;
 using PhoneGuide.Domain.Entities;
 
 namespace PhoneGuide.Persistance.Services
@@ -51,11 +51,11 @@ namespace PhoneGuide.Persistance.Services
             return deleted;
         }
 
-        public List<DtoCreatePerson> GetAll()
+        public List<DtoDisplayPerson> GetAll()
         {
             var persons = _unitOfWork.PersonRepository.GetAll();
 
-            return persons.Select(q => new DtoCreatePerson
+            return persons.Select(q => new DtoDisplayPerson
             {
                 Name = q.Name,
                 Company = q.Company,
@@ -63,11 +63,11 @@ namespace PhoneGuide.Persistance.Services
             }).ToList();
         }
 
-        public async Task<DtoCreatePerson> GetByIdAsync(Guid id)
+        public async Task<DtoDisplayPerson> GetByIdAsync(Guid id)
         {
             var person = await _unitOfWork.PersonRepository.GetByIdAsync(id.ToString());
 
-            return new DtoCreatePerson
+            return new()
             {
                 Name = person.Name,
                 Company = person.Company,

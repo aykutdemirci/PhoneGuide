@@ -1,4 +1,4 @@
-﻿using PhoneGuide.Application.Dto;
+﻿using PhoneGuide.Application.Dto.Person;
 
 namespace PhoneGuide.Application.Abstractions.Services
 {
@@ -12,8 +12,8 @@ namespace PhoneGuide.Application.Abstractions.Services
 
         Task<bool> DeleteByIdAsync(Guid id);
 
-        List<DtoCreatePerson> GetAll();
+        List<DtoDisplayPerson> GetAll();
 
-        Task<DtoCreatePerson> GetByIdAsync(Guid id);
+        Task<DtoDisplayPerson> GetByIdAsync(Guid id);
     }
 }

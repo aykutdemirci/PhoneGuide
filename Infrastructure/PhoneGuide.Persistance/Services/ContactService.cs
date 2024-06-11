@@ -1,6 +1,6 @@
 ﻿using PhoneGuide.Application.Abstractions.Services;
 using PhoneGuide.Application.Abstractions.UnitOfWork;
-using PhoneGuide.Application.Dto;
+using PhoneGuide.Application.Dto.Contact;
 using PhoneGuide.Domain.Entities;
 
 namespace PhoneGuide.Persistance.Services
@@ -14,7 +14,7 @@ namespace PhoneGuide.Persistance.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateAsync(DtoContact dtoContact)
+        public async Task<bool> CreateAsync(DtoCreateContact dtoContact)
         {
             var added = await _unitOfWork.ContactRepository.AddAsync(new Contact
             {
@@ -28,7 +28,7 @@ namespace PhoneGuide.Persistance.Services
             return added;
         }
 
-        public async Task<bool> CreateMultipleAsync(List<DtoContact> dtoContacts)
+        public async Task<bool> CreateMultipleAsync(List<DtoCreateContact> dtoContacts)
         {
             var added = await _unitOfWork.ContactRepository.AddRangeAsync(dtoContacts.Select(q => new Contact
             {
@@ -51,40 +51,36 @@ namespace PhoneGuide.Persistance.Services
             return deleted;
         }
 
-        public List<DtoContact> GetAll()
+        public List<DtoCreateContact> GetAll()
         {
             var contacts = _unitOfWork.ContactRepository.GetAll();
 
-            return contacts.Select(q => new DtoContact
+            return contacts.Select(q => new DtoCreateContact
             {
-                Person = q.Person,
                 Content = q.Content,
                 PersonId = q.PersonId,
                 ContactType = q.ContactType,
             }).ToList();
         }
 
-        public async Task<DtoContact> GetByIdAsync(Guid id)
+        public async Task<DtoCreateContact> GetByIdAsync(Guid id)
         {
             var contact = await _unitOfWork.ContactRepository.GetByIdAsync(id.ToString());
 
-            return new DtoContact
+            return new DtoCreateContact
             {
-                Person = contact.Person,
                 Content = contact.Content,
                 PersonId = contact.PersonId,
-                ContactType = contact.ContactType,
+                ContactType = contact.ContactType,                 
             };
         }
 
-        public async Task<bool> UpdateAsync(DtoContact dtoContact)
+        public async Task<bool> UpdateAsync(DtoUpdateContact dtoUpdateContact)
         {
-            var contact = await _unitOfWork.ContactRepository.GetByIdAsync(dtoContact.Id.ToString());
+            var contact = await _unitOfWork.ContactRepository.GetByIdAsync(dtoUpdateContact.Id.ToString());
 
-            contact.Id = dtoContact.Id;
-            contact.Content = dtoContact.Content;
-            contact.PersonId = dtoContact.PersonId;
-            contact.ContactType = dtoContact.ContactType;
+            contact.Content = dtoUpdateContact.Content;
+            contact.ContactType = dtoUpdateContact.ContactType;
 
             var updated = _unitOfWork.ContactRepository.Update(contact);
 

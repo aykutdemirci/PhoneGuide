@@ -1,9 +1,7 @@
-﻿namespace PhoneGuide.Application.Dto
+﻿namespace PhoneGuide.Application.Dto.Person
 {
-    public class DtoUpdatePerson
+    public sealed class DtoCreatePerson
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string LastName { get; set; }
