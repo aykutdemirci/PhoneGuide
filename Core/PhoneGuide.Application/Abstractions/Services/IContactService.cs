@@ -12,8 +12,6 @@ namespace PhoneGuide.Application.Abstractions.Services
 
         bool DeleteById(Guid id);
 
-        Task<bool> DeleteRangeAsync(List<DtoContact> contacts);
-
         List<DtoContact> GetAll();
 
         Task<DtoContact> GetByIdAsync(Guid id);

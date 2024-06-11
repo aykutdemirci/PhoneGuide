@@ -15,8 +15,6 @@ namespace PhoneGuide.Application.Repositories
 
         bool DeleteById(string id);
 
-        Task<bool> DeleteRangeAsync(List<T> entities);
-
         Task<T> GetByIdAsync(string id, bool tracking = true);
 
         IQueryable<T> GetAll(bool tracking = false);

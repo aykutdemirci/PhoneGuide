@@ -36,12 +36,6 @@ namespace PhoneGuide.Persistance.Repositories
             return entityEntry.State == EntityState.Deleted;
         }
 
-        public async Task<bool> DeleteRangeAsync(List<T> entities)
-        {
-            await Task.Run(() => Table.RemoveRange(entities));
-            return true;
-        }
-
         public IQueryable<T> GetAll(bool tracking = false)
         {
             if (!tracking) return Table.AsQueryable();

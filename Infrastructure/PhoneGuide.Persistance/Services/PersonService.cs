@@ -39,17 +39,6 @@ namespace PhoneGuide.Persistance.Services
             return _unitOfWork.PersonRepository.DeleteById(id.ToString());
         }
 
-        public Task<bool> DeleteRangeAsync(List<DtoPerson> persons)
-        {
-            return _unitOfWork.PersonRepository.DeleteRangeAsync(persons.Select(q => new Person
-            {
-                Id = q.Id,
-                Name = q.Name,
-                Company = q.Company,
-                LastName = q.LastName,
-            }).ToList());
-        }
-
         public List<DtoPerson> GetAll()
         {
             var persons = _unitOfWork.PersonRepository.GetAll();
@@ -74,14 +63,15 @@ namespace PhoneGuide.Persistance.Services
             };
         }
 
-        public Task<bool> UpdateAsync(DtoPerson person)
+        public async Task<bool> UpdateAsync(DtoPerson dtoPerson)
         {
-            return _unitOfWork.PersonRepository.UpdateAsync(new Person
-            {
-                Name = person.Name,
-                Company = person.Company,
-                LastName = person.LastName,
-            });
+            var person = await _unitOfWork.PersonRepository.GetByIdAsync(dtoPerson.Id.ToString());
+
+            person.Name = dtoPerson.Name;
+            person.Company = dtoPerson.Company;
+            person.LastName = dtoPerson.LastName;
+
+            return await _unitOfWork.PersonRepository.UpdateAsync(person);
         }
     }
 }
