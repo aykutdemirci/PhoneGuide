@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using PhoneGuide.Application.Abstractions.Caching;
 
-namespace PhoneGuide.Infrastructure.Services
+namespace PhoneGuide.Infrastructure.Services.Caching
 {
     public class InMemoryCacheService : ICacheService
     {

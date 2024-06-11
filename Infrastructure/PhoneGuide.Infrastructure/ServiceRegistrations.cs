@@ -2,7 +2,7 @@
 using PhoneGuide.Application.Abstractions.Caching;
 using PhoneGuide.Application.Abstractions.HttpClient;
 using PhoneGuide.Infrastructure.Enums;
-using PhoneGuide.Infrastructure.Services;
+using PhoneGuide.Infrastructure.Services.Caching;
 
 namespace PhoneGuide.Infrastructure
 {
