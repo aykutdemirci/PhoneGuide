@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PhoneGuide.Application.Abstractions.UnitOfWork;
+using PhoneGuide.Application.Repositories;
 using PhoneGuide.Persistance.Configurations;
 using PhoneGuide.Persistance.Contexts;
+using PhoneGuide.Persistance.Repositories;
 
 namespace PhoneGuide.Persistance
 {
@@ -10,6 +13,9 @@ namespace PhoneGuide.Persistance
         public static void AddPersistanceServices(this IServiceCollection services)
         {
             services.AddDbContext<PhoneGuideDbContext>(opts => opts.UseNpgsql(ConnectionStrings.PostgreSQL));
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
