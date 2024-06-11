@@ -23,6 +23,7 @@ namespace PhoneGuide.Persistance
 
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IReportService, ReportService>();
         }
     }
 }
