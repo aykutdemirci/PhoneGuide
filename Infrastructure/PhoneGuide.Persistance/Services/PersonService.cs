@@ -94,6 +94,23 @@ namespace PhoneGuide.Persistance.Services
             };
         }
 
+        public async Task<DtoDisplayPersonWithContacts> GetByIdWithContactsAsync(Guid id)
+        {
+            var person = await _unitOfWork.PersonRepository.Table.Where(q => q.Id == id).Include(q => q.Contacts).FirstOrDefaultAsync();
+            return new()
+            {
+                Name = person.Name,
+                Company = person.Company,
+                Id = person.Id.ToString(),
+                LastName = person.LastName,
+                Contacts = person.Contacts.Select(q => new
+                {
+                    q.Content,
+                    q.ContactType,
+                }).ToList()
+            };
+        }
+
         public async Task<bool> UpdateAsync(DtoUpdatePerson dtoPerson)
         {
             var person = await _unitOfWork.PersonRepository.GetByIdAsync(dtoPerson.Id.ToString());

@@ -15,5 +15,7 @@ namespace PhoneGuide.Application.Abstractions.Services
         Task<List<DtoDisplayPerson>> GetAllAsync();
 
         Task<DtoDisplayPerson> GetByIdAsync(Guid id);
+
+        Task<DtoDisplayPersonWithContacts> GetByIdWithContactsAsync(Guid id);
     }
 }

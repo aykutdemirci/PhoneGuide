@@ -33,6 +33,13 @@ namespace PhoneGuide.API.Controllers
             return Ok(persons);
         }
 
+        [HttpGet("Get/{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var person = await _personService.GetByIdWithContactsAsync(Guid.Parse(id));
+            return Ok(person);
+        }
+
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteById(string id)
         {
