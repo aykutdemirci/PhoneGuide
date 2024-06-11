@@ -8,8 +8,6 @@ namespace PhoneGuide.Application.Abstractions.UnitOfWork
 
         public IPersonRepository PersonRepository { get; }
 
-        public IReportRepository ReportRepository { get; }
-
         Task SaveAsync();
     }
 }

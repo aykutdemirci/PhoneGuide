@@ -12,17 +12,13 @@ namespace PhoneGuide.Persistance
 
         public IPersonRepository PersonRepository { get; }
 
-        public IReportRepository ReportRepository { get; }
-
         public UnitOfWork(PhoneGuideDbContext dbContext,
                           IContactRepository contactRepository,
-                          IPersonRepository personRepository,
-                          IReportRepository reportRepository)
+                          IPersonRepository personRepository)
         {
             _dbContext = dbContext;
             ContactRepository = contactRepository;
             PersonRepository = personRepository;
-            ReportRepository = reportRepository;
         }
 
         public async Task SaveAsync()

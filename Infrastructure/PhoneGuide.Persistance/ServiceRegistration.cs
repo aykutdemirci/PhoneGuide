@@ -18,13 +18,11 @@ namespace PhoneGuide.Persistance
 
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
-            services.AddScoped<IReportRepository, ReportRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IContactService, ContactService>();
-            services.AddScoped<IReportService, ReportService>();
         }
     }
 }

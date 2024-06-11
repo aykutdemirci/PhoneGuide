@@ -10,31 +10,14 @@ namespace PhoneGuide.API.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        private readonly IReportService _reportService;
-
-        public ReportController(IReportService reportService)
+        public ReportController()
         {
-            _reportService = reportService;
         }
 
         [HttpPost("CreateReportRequest")]
-        public async Task<IActionResult> Create()
+        public IActionResult CreateReportRequest()
         {
-            var dtoReport = new DtoCreateReport { ReportStatus = ReportStatus.Preparing, RequestedDate = DateTime.UtcNow };
-
-            var result = await _reportService.CreateAsync(dtoReport);
-
-            if (result) return new StatusCodeResult((int)HttpStatusCode.Created);
-
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-        }
-
-        [HttpGet("GetAllReportRequests")]
-        public async Task<IActionResult> GetAllReportRequests()
-        {
-            var reports = await _reportService.GetAllAsync();
-
-            return Ok(reports);
+            return Ok();
         }
     }
 }
