@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PhoneGuide.Application.Abstractions.Services;
-using PhoneGuide.Application.Dto.Report;
-using PhoneGuide.Domain.Entities.Enums;
-using System.Net;
+using PhoneGuide.API.ServiceEndpoints;
+using PhoneGuide.Application.Abstractions.HttpClient;
 
 namespace PhoneGuide.API.Controllers
 {
@@ -10,14 +8,18 @@ namespace PhoneGuide.API.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        public ReportController()
+        private readonly IHttpClient _httpClient;
+
+        public ReportController(IHttpClient httpClient)
         {
+            _httpClient = httpClient;
         }
 
         [HttpPost("CreateReportRequest")]
-        public IActionResult CreateReportRequest()
+        public async Task<IActionResult> CreateReportRequest()
         {
-            return Ok();
+            var statusCode = await _httpClient.PostAsync(ReportServiceEndpoints.CreateReportRequest);
+            return new StatusCodeResult((int)statusCode);
         }
     }
 }

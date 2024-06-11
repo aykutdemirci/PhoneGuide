@@ -1,12 +1,14 @@
 using PhoneGuide.API.Extensions;
 using PhoneGuide.Infrastructure;
 using PhoneGuide.Infrastructure.Enums;
+using PhoneGuide.Infrastructure.Services.HttpClientServices;
 using PhoneGuide.Persistance;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistanceServices();
+builder.Services.AddHttpClient().AddHttpClientService<ReportServiceHttpClient>();
 
 builder.Services.AddCache(CachingType.InMemory);
 
