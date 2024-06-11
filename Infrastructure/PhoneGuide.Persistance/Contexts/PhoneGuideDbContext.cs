@@ -18,11 +18,11 @@ namespace PhoneGuide.Persistance.Contexts
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Entity.CreatedDate = DateTime.Now;
+                    entry.Entity.CreatedDate = DateTime.UtcNow;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
-                    entry.Entity.UpdatedDate = DateTime.Now;
+                    entry.Entity.UpdatedDate = DateTime.UtcNow;
                 }
             }
 

@@ -59,6 +59,7 @@ namespace PhoneGuide.Persistance.Services
             {
                 Name = q.Name,
                 Company = q.Company,
+                Id = q.Id.ToString(),
                 LastName = q.LastName,
             }).ToList();
         }
@@ -71,6 +72,7 @@ namespace PhoneGuide.Persistance.Services
             {
                 Name = person.Name,
                 Company = person.Company,
+                Id = person.Id.ToString(),
                 LastName = person.LastName,
             };
         }
