@@ -11,9 +11,9 @@ namespace PhoneGuide.Application.Repositories
 
         Task<bool> AddRangeAsync(List<T> entites);
 
-        Task<bool> UpdateAsync(T entity);
+        bool Update(T entity);
 
-        bool DeleteById(string id);
+        Task<bool> DeleteByIdAsync(string id);
 
         Task<T> GetByIdAsync(string id, bool tracking = true);
 

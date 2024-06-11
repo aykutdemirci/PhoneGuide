@@ -16,27 +16,39 @@ namespace PhoneGuide.Persistance.Services
 
         public async Task<bool> CreateAsync(DtoPerson dtoPerson)
         {
-            return await _unitOfWork.PersonRepository.AddAsync(new Person
+            var added = await _unitOfWork.PersonRepository.AddAsync(new Person
             {
                 Name = dtoPerson.Name,
                 Company = dtoPerson.Company,
                 LastName = dtoPerson.LastName,
             });
+
+            if (added) await _unitOfWork.SaveAsync();
+
+            return added;
         }
 
         public async Task<bool> CreateMultipleAsync(List<DtoPerson> dtoPersons)
         {
-            return await _unitOfWork.PersonRepository.AddRangeAsync(dtoPersons.Select(q => new Person
+            var added = await _unitOfWork.PersonRepository.AddRangeAsync(dtoPersons.Select(q => new Person
             {
                 Name = q.Name,
                 Company = q.Company,
                 LastName = q.LastName,
             }).ToList());
+
+            if (added) await _unitOfWork.SaveAsync();
+
+            return added;
         }
 
-        public bool DeleteById(Guid id)
+        public async Task<bool> DeleteByIdAsync(Guid id)
         {
-            return _unitOfWork.PersonRepository.DeleteById(id.ToString());
+            var deleted = await _unitOfWork.PersonRepository.DeleteByIdAsync(id.ToString());
+
+            if (deleted) await _unitOfWork.SaveAsync();
+
+            return deleted;
         }
 
         public List<DtoPerson> GetAll()
@@ -71,7 +83,11 @@ namespace PhoneGuide.Persistance.Services
             person.Company = dtoPerson.Company;
             person.LastName = dtoPerson.LastName;
 
-            return await _unitOfWork.PersonRepository.UpdateAsync(person);
+            var updated = _unitOfWork.PersonRepository.Update(person);
+
+            if (updated) await _unitOfWork.SaveAsync();
+
+            return true;
         }
     }
 }

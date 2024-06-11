@@ -16,27 +16,39 @@ namespace PhoneGuide.Persistance.Services
 
         public async Task<bool> CreateAsync(DtoContact dtoContact)
         {
-            return await _unitOfWork.ContactRepository.AddAsync(new Contact
+            var added = await _unitOfWork.ContactRepository.AddAsync(new Contact
             {
                 Content = dtoContact.Content,
                 PersonId = dtoContact.PersonId,
                 ContactType = dtoContact.ContactType,
             });
+
+            if (added) await _unitOfWork.SaveAsync();
+
+            return added;
         }
 
         public async Task<bool> CreateMultipleAsync(List<DtoContact> dtoContacts)
         {
-            return await _unitOfWork.ContactRepository.AddRangeAsync(dtoContacts.Select(q => new Contact
+            var added = await _unitOfWork.ContactRepository.AddRangeAsync(dtoContacts.Select(q => new Contact
             {
                 Content = q.Content,
                 PersonId = q.PersonId,
                 ContactType = q.ContactType,
             }).ToList());
+
+            if (added) await _unitOfWork.SaveAsync();
+
+            return added;
         }
 
-        public bool DeleteById(Guid id)
+        public async Task<bool> DeleteByIdAsync(Guid id)
         {
-            return _unitOfWork.ContactRepository.DeleteById(id.ToString());
+            var deleted = await _unitOfWork.ContactRepository.DeleteByIdAsync(id.ToString());
+
+            if (deleted) await _unitOfWork.SaveAsync();
+
+            return deleted;
         }
 
         public List<DtoContact> GetAll()
@@ -74,7 +86,11 @@ namespace PhoneGuide.Persistance.Services
             contact.PersonId = dtoContact.PersonId;
             contact.ContactType = dtoContact.ContactType;
 
-            return await _unitOfWork.ContactRepository.UpdateAsync(contact);
+            var updated = _unitOfWork.ContactRepository.Update(contact);
+
+            if (updated) await _unitOfWork.SaveAsync();
+
+            return updated;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PhoneGuide.Application.Abstractions.Services
 
         Task<bool> UpdateAsync(DtoContact dtoContact);
 
-        bool DeleteById(Guid id);
+        Task<bool> DeleteByIdAsync(Guid id);
 
         List<DtoContact> GetAll();
 

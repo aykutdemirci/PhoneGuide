@@ -28,11 +28,12 @@ namespace PhoneGuide.Persistance.Repositories
             return true;
         }
 
-        public bool DeleteById(string id)
+        public async Task<bool> DeleteByIdAsync(string id)
         {
-            var entity = Task.Run(async () => await GetByIdAsync(id)).ConfigureAwait(false).GetAwaiter().GetResult();
+            var entity = await GetByIdAsync(id);
 
             var entityEntry = Table.Remove(entity);
+
             return entityEntry.State == EntityState.Deleted;
         }
 
@@ -52,9 +53,10 @@ namespace PhoneGuide.Persistance.Repositories
             return await queryable.FirstOrDefaultAsync(q => q.Id == Guid.Parse(id));
         }
 
-        public Task<bool> UpdateAsync(T entity)
+        public bool Update(T entity)
         {
-            throw new NotImplementedException();
+            var entityEntry = Table.Update(entity);
+            return entityEntry.State == EntityState.Modified;
         }
     }
 }
