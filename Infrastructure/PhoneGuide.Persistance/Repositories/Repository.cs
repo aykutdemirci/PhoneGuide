@@ -39,9 +39,9 @@ namespace PhoneGuide.Persistance.Repositories
 
         public IQueryable<T> GetAll(bool tracking = false)
         {
-            if (!tracking) return Table.AsQueryable();
+            if (!tracking) return Table.AsNoTracking();
 
-            return Table.AsNoTracking();
+            return Table.AsQueryable();
         }
 
         public async Task<T> GetByIdAsync(string id, bool tracking = true)
