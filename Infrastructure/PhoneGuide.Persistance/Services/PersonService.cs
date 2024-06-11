@@ -14,7 +14,7 @@ namespace PhoneGuide.Persistance.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateAsync(DtoPerson dtoPerson)
+        public async Task<bool> CreateAsync(DtoCreatePerson dtoPerson)
         {
             var added = await _unitOfWork.PersonRepository.AddAsync(new Person
             {
@@ -28,7 +28,7 @@ namespace PhoneGuide.Persistance.Services
             return added;
         }
 
-        public async Task<bool> CreateMultipleAsync(List<DtoPerson> dtoPersons)
+        public async Task<bool> CreateMultipleAsync(List<DtoCreatePerson> dtoPersons)
         {
             var added = await _unitOfWork.PersonRepository.AddRangeAsync(dtoPersons.Select(q => new Person
             {
@@ -51,11 +51,11 @@ namespace PhoneGuide.Persistance.Services
             return deleted;
         }
 
-        public List<DtoPerson> GetAll()
+        public List<DtoCreatePerson> GetAll()
         {
             var persons = _unitOfWork.PersonRepository.GetAll();
 
-            return persons.Select(q => new DtoPerson
+            return persons.Select(q => new DtoCreatePerson
             {
                 Name = q.Name,
                 Company = q.Company,
@@ -63,11 +63,11 @@ namespace PhoneGuide.Persistance.Services
             }).ToList();
         }
 
-        public async Task<DtoPerson> GetByIdAsync(Guid id)
+        public async Task<DtoCreatePerson> GetByIdAsync(Guid id)
         {
             var person = await _unitOfWork.PersonRepository.GetByIdAsync(id.ToString());
 
-            return new DtoPerson
+            return new DtoCreatePerson
             {
                 Name = person.Name,
                 Company = person.Company,
@@ -75,7 +75,7 @@ namespace PhoneGuide.Persistance.Services
             };
         }
 
-        public async Task<bool> UpdateAsync(DtoPerson dtoPerson)
+        public async Task<bool> UpdateAsync(DtoUpdatePerson dtoPerson)
         {
             var person = await _unitOfWork.PersonRepository.GetByIdAsync(dtoPerson.Id.ToString());
 

@@ -4,16 +4,16 @@ namespace PhoneGuide.Application.Abstractions.Services
 {
     public interface IPersonService
     {
-        Task<bool> CreateAsync(DtoPerson dtoPerson);
+        Task<bool> CreateAsync(DtoCreatePerson dtoPerson);
 
-        Task<bool> CreateMultipleAsync(List<DtoPerson> dtoPersons);
+        Task<bool> CreateMultipleAsync(List<DtoCreatePerson> dtoPersons);
 
-        Task<bool> UpdateAsync(DtoPerson dtoPerson);
+        Task<bool> UpdateAsync(DtoUpdatePerson dtoPerson);
 
         Task<bool> DeleteByIdAsync(Guid id);
 
-        List<DtoPerson> GetAll();
+        List<DtoCreatePerson> GetAll();
 
-        Task<DtoPerson> GetByIdAsync(Guid id);
+        Task<DtoCreatePerson> GetByIdAsync(Guid id);
     }
 }
