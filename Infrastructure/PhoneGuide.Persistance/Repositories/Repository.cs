@@ -28,12 +28,6 @@ namespace PhoneGuide.Persistance.Repositories
             return true;
         }
 
-        public bool Delete(T entity)
-        {
-            var entityEntry = Table.Remove(entity);
-            return entityEntry.State == EntityState.Deleted;
-        }
-
         public bool DeleteById(string id)
         {
             var entity = Task.Run(async () => await GetByIdAsync(id)).ConfigureAwait(false).GetAwaiter().GetResult();
