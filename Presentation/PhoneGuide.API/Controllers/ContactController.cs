@@ -25,5 +25,15 @@ namespace PhoneGuide.API.Controllers
 
             return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
+
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await _contactService.DeleteByIdAsync(Guid.Parse(id));
+
+            if (result) return Ok();
+
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+        }
     }
 }
