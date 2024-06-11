@@ -27,9 +27,9 @@ namespace PhoneGuide.API.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var persons = _personService.GetAll();
+            var persons = await _personService.GetAllAsync();
             return new OkObjectResult(persons);
         }
     }

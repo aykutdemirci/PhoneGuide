@@ -1,4 +1,6 @@
-﻿using PhoneGuide.Application.Abstractions.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneGuide.Application.Abstractions.Caching;
+using PhoneGuide.Application.Abstractions.Services;
 using PhoneGuide.Application.Abstractions.UnitOfWork;
 using PhoneGuide.Application.Dto.Person;
 using PhoneGuide.Domain.Entities;
@@ -8,10 +10,12 @@ namespace PhoneGuide.Persistance.Services
     public sealed class PersonService : IPersonService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICacheService _cacheService;
 
-        public PersonService(IUnitOfWork unitOfWork)
+        public PersonService(IUnitOfWork unitOfWork, ICacheService cacheService)
         {
             _unitOfWork = unitOfWork;
+            _cacheService = cacheService;
         }
 
         public async Task<bool> CreateAsync(DtoCreatePerson dtoPerson)
@@ -51,17 +55,23 @@ namespace PhoneGuide.Persistance.Services
             return deleted;
         }
 
-        public List<DtoDisplayPerson> GetAll()
+        public async Task<List<DtoDisplayPerson>> GetAllAsync()
         {
-            var persons = _unitOfWork.PersonRepository.GetAll();
+            var exists = _cacheService.TryGetValue("all_persons_list", out List<DtoDisplayPerson> personsInCache);
 
-            return persons.Select(q => new DtoDisplayPerson
+            if (exists) return personsInCache;
+
+            var persons = await _unitOfWork.PersonRepository.GetAll().Select(q => new DtoDisplayPerson
             {
                 Name = q.Name,
                 Company = q.Company,
                 Id = q.Id.ToString(),
                 LastName = q.LastName,
-            }).ToList();
+            }).ToListAsync();
+
+            _cacheService.Add("all_persons_list", persons);
+
+            return persons;
         }
 
         public async Task<DtoDisplayPerson> GetByIdAsync(Guid id)

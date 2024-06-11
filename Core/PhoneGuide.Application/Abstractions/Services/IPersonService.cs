@@ -12,7 +12,7 @@ namespace PhoneGuide.Application.Abstractions.Services
 
         Task<bool> DeleteByIdAsync(Guid id);
 
-        List<DtoDisplayPerson> GetAll();
+        Task<List<DtoDisplayPerson>> GetAllAsync();
 
         Task<DtoDisplayPerson> GetByIdAsync(Guid id);
     }

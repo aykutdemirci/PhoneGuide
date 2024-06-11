@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\PhoneGuide.Infrastructure\PhoneGuide.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\PhoneGuide.Persistance\PhoneGuide.Persistance.csproj" />
   </ItemGroup>
 
