@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PhoneGuide.Application.Abstractions.Caching;
 using PhoneGuide.Application.Abstractions.Services;
 using PhoneGuide.Application.Abstractions.UnitOfWork;
@@ -11,11 +12,13 @@ namespace PhoneGuide.Persistance.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICacheService _cacheService;
+        private readonly ILogger<PersonService> _looger;
 
-        public PersonService(IUnitOfWork unitOfWork, ICacheService cacheService)
+        public PersonService(IUnitOfWork unitOfWork, ICacheService cacheService, ILogger<PersonService> looger)
         {
             _unitOfWork = unitOfWork;
             _cacheService = cacheService;
+            _looger = looger;
         }
 
         public async Task<bool> CreateAsync(DtoCreatePerson dtoPerson)
@@ -59,7 +62,11 @@ namespace PhoneGuide.Persistance.Services
         {
             var exists = _cacheService.TryGetValue("all_persons_list", out List<DtoDisplayPerson> personsInCache);
 
-            if (exists) return personsInCache;
+            if (exists)
+            {
+                _looger.LogInformation("all persons list getting from cache");
+                return personsInCache;
+            }
 
             var persons = await _unitOfWork.PersonRepository.GetAll().Select(q => new DtoDisplayPerson
             {

@@ -1,3 +1,4 @@
+using PhoneGuide.API.Extensions;
 using PhoneGuide.Infrastructure;
 using PhoneGuide.Infrastructure.Enums;
 using PhoneGuide.Persistance;
@@ -24,6 +25,8 @@ var looger = new LoggerConfiguration()
 builder.Host.UseSerilog(looger);
 
 var app = builder.Build();
+
+app.AddExceptionHandler(app.Services.GetRequiredService<ILogger<Program>>());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
