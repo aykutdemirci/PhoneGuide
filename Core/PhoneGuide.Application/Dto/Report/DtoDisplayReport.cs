@@ -2,9 +2,9 @@
 
 namespace PhoneGuide.Application.Dto.Report
 {
-    public class DtoReport
+    public class DtoDisplayReport
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime RequestedDate { get; set; }
 

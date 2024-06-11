@@ -16,12 +16,12 @@ namespace PhoneGuide.Persistance.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateAsync(DtoReport dtoCreateReport)
+        public async Task<bool> CreateAsync(DtoCreateReport dtoCreateReport)
         {
             var added = await _unitOfWork.ReportRepository.AddAsync(new Report
             {
-                RequestedDate = DateTime.UtcNow,
-                ReportStatus = ReportStatus.Preparing,
+                RequestedDate = dtoCreateReport.RequestedDate,
+                ReportStatus = dtoCreateReport.ReportStatus,
             });
 
             if (added) await _unitOfWork.SaveAsync();
@@ -29,9 +29,9 @@ namespace PhoneGuide.Persistance.Services
             return added;
         }
 
-        public async Task<List<DtoReport>> GetAllAsync()
+        public async Task<List<DtoCreateReport>> GetAllAsync()
         {
-            return await _unitOfWork.ReportRepository.GetAll().Select(q => new DtoReport
+            return await _unitOfWork.ReportRepository.GetAll().Select(q => new DtoCreateReport
             {
                 RequestedDate = q.RequestedDate,
                 ReportStatus = q.ReportStatus,

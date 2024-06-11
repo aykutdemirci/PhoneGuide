@@ -4,8 +4,8 @@ namespace PhoneGuide.Application.Abstractions.Services
 {
     public interface IReportService
     {
-        Task<bool> CreateAsync(DtoReport dtoCreateReport);
+        Task<bool> CreateAsync(DtoCreateReport dtoCreateReport);
 
-        Task<List<DtoReport>> GetAllAsync();
+        Task<List<DtoCreateReport>> GetAllAsync();
     }
 }
