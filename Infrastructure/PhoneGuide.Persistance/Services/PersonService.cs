@@ -36,7 +36,7 @@ namespace PhoneGuide.Persistance.Services
 
         public bool DeleteById(Guid id)
         {
-            return _unitOfWork.PersonRepository.Delete(id);
+            return _unitOfWork.PersonRepository.DeleteById(id.ToString());
         }
 
         public Task<bool> DeleteRangeAsync(List<DtoPerson> persons)
@@ -50,9 +50,9 @@ namespace PhoneGuide.Persistance.Services
             }).ToList());
         }
 
-        public async Task<List<DtoPerson>> GetAllAsync()
+        public List<DtoPerson> GetAll()
         {
-            var persons = await _unitOfWork.PersonRepository.GetAllAsync();
+            var persons = _unitOfWork.PersonRepository.GetAll();
 
             return persons.Select(q => new DtoPerson
             {
@@ -64,7 +64,7 @@ namespace PhoneGuide.Persistance.Services
 
         public async Task<DtoPerson> GetByIdAsync(Guid id)
         {
-            var person = await _unitOfWork.PersonRepository.GetByIdAsync(id);
+            var person = await _unitOfWork.PersonRepository.GetByIdAsync(id.ToString());
 
             return new DtoPerson
             {

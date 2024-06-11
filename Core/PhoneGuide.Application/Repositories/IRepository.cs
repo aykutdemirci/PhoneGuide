@@ -13,12 +13,14 @@ namespace PhoneGuide.Application.Repositories
 
         Task<bool> UpdateAsync(T entity);
 
-        bool Delete(Guid id);
+        bool Delete(T entity);
+
+        bool DeleteById(string id);
 
         Task<bool> DeleteRangeAsync(List<T> entities);
 
-        Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByIdAsync(string id, bool tracking = true);
 
-        Task<IQueryable<T>> GetAllAsync(bool tracking = false);
+        IQueryable<T> GetAll(bool tracking = false);
     }
 }

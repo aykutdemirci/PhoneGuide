@@ -14,7 +14,7 @@ namespace PhoneGuide.Application.Abstractions.Services
 
         Task<bool> DeleteRangeAsync(List<DtoPerson> persons);
 
-        Task<List<DtoPerson>> GetAllAsync();
+        List<DtoPerson> GetAll();
 
         Task<DtoPerson> GetByIdAsync(Guid id);
     }
