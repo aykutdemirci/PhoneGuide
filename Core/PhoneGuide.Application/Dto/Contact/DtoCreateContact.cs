@@ -8,6 +8,6 @@ namespace PhoneGuide.Application.Dto.Contact
 
         public string Content { get; set; }
 
-        public Guid PersonId { get; set; }
+        public string PersonId { get; set; }
     }
 }

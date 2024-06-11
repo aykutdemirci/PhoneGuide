@@ -30,7 +30,17 @@ namespace PhoneGuide.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var persons = await _personService.GetAllAsync();
-            return new OkObjectResult(persons);
+            return Ok(persons);
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> DeleteById(string id)
+        {
+            var result = await _personService.DeleteByIdAsync(Guid.Parse(id));
+
+            if (result) return Ok();
+
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
     }
 }

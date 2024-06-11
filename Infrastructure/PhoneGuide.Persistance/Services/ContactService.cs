@@ -19,8 +19,8 @@ namespace PhoneGuide.Persistance.Services
             var added = await _unitOfWork.ContactRepository.AddAsync(new Contact
             {
                 Content = dtoContact.Content,
-                PersonId = dtoContact.PersonId,
                 ContactType = dtoContact.ContactType,
+                PersonId = Guid.Parse(dtoContact.PersonId),
             });
 
             if (added) await _unitOfWork.SaveAsync();
@@ -33,8 +33,8 @@ namespace PhoneGuide.Persistance.Services
             var added = await _unitOfWork.ContactRepository.AddRangeAsync(dtoContacts.Select(q => new Contact
             {
                 Content = q.Content,
-                PersonId = q.PersonId,
                 ContactType = q.ContactType,
+                PersonId = Guid.Parse(q.PersonId),
             }).ToList());
 
             if (added) await _unitOfWork.SaveAsync();
@@ -58,8 +58,8 @@ namespace PhoneGuide.Persistance.Services
             return contacts.Select(q => new DtoCreateContact
             {
                 Content = q.Content,
-                PersonId = q.PersonId,
                 ContactType = q.ContactType,
+                PersonId = q.PersonId.ToString(),
             }).ToList();
         }
 
@@ -70,8 +70,8 @@ namespace PhoneGuide.Persistance.Services
             return new DtoCreateContact
             {
                 Content = contact.Content,
-                PersonId = contact.PersonId,
-                ContactType = contact.ContactType,                 
+                ContactType = contact.ContactType,
+                PersonId = contact.PersonId.ToString(),
             };
         }
 

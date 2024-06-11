@@ -14,7 +14,7 @@ namespace PhoneGuide.Infrastructure.Services
 
         public void Add(string key, object value)
         {
-            _memoryCache.Set(key, value);
+            _memoryCache.Set(key, value, DateTimeOffset.UtcNow.AddSeconds(10));
         }
 
         public void Remove(string key)
