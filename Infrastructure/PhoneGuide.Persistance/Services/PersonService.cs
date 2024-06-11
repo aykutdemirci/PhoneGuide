@@ -14,19 +14,19 @@ namespace PhoneGuide.Persistance.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateAsync(DtoPerson person)
+        public async Task<bool> CreateAsync(DtoPerson dtoPerson)
         {
             return await _unitOfWork.PersonRepository.AddAsync(new Person
             {
-                Name = person.Name,
-                Company = person.Company,
-                LastName = person.LastName,
+                Name = dtoPerson.Name,
+                Company = dtoPerson.Company,
+                LastName = dtoPerson.LastName,
             });
         }
 
-        public async Task<bool> CreateMultipleAsync(List<DtoPerson> persons)
+        public async Task<bool> CreateMultipleAsync(List<DtoPerson> dtoPersons)
         {
-            return await _unitOfWork.PersonRepository.AddRangeAsync(persons.Select(q => new Person
+            return await _unitOfWork.PersonRepository.AddRangeAsync(dtoPersons.Select(q => new Person
             {
                 Name = q.Name,
                 Company = q.Company,

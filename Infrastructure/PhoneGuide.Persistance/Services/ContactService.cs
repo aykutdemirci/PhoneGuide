@@ -14,19 +14,19 @@ namespace PhoneGuide.Persistance.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateAsync(DtoContact dto)
+        public async Task<bool> CreateAsync(DtoContact dtoContact)
         {
             return await _unitOfWork.ContactRepository.AddAsync(new Contact
             {
-                Content = dto.Content,
-                PersonId = dto.PersonId,
-                ContactType = dto.ContactType,
+                Content = dtoContact.Content,
+                PersonId = dtoContact.PersonId,
+                ContactType = dtoContact.ContactType,
             });
         }
 
-        public async Task<bool> CreateMultipleAsync(List<DtoContact> dtos)
+        public async Task<bool> CreateMultipleAsync(List<DtoContact> dtoContacts)
         {
-            return await _unitOfWork.ContactRepository.AddRangeAsync(dtos.Select(q => new Contact
+            return await _unitOfWork.ContactRepository.AddRangeAsync(dtoContacts.Select(q => new Contact
             {
                 Content = q.Content,
                 PersonId = q.PersonId,
@@ -65,15 +65,16 @@ namespace PhoneGuide.Persistance.Services
             };
         }
 
-        public async Task<bool> UpdateAsync(DtoContact dto)
+        public async Task<bool> UpdateAsync(DtoContact dtoContact)
         {
-            return await _unitOfWork.ContactRepository.UpdateAsync(new Contact
-            {
-                Id = dto.Id,
-                Content = dto.Content,
-                PersonId = dto.PersonId,
-                ContactType = dto.ContactType,
-            });
+            var contact = await _unitOfWork.ContactRepository.GetByIdAsync(dtoContact.Id.ToString());
+
+            contact.Id = dtoContact.Id;
+            contact.Content = dtoContact.Content;
+            contact.PersonId = dtoContact.PersonId;
+            contact.ContactType = dtoContact.ContactType;
+
+            return await _unitOfWork.ContactRepository.UpdateAsync(contact);
         }
     }
 }

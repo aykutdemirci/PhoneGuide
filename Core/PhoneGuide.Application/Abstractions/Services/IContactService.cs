@@ -4,11 +4,11 @@ namespace PhoneGuide.Application.Abstractions.Services
 {
     public interface IContactService
     {
-        Task<bool> CreateAsync(DtoContact contact);
+        Task<bool> CreateAsync(DtoContact dtoContact);
 
-        Task<bool> CreateMultipleAsync(List<DtoContact> contacts);
+        Task<bool> CreateMultipleAsync(List<DtoContact> dtoContacts);
 
-        Task<bool> UpdateAsync(DtoContact contact);
+        Task<bool> UpdateAsync(DtoContact dtoContact);
 
         bool DeleteById(Guid id);
 
