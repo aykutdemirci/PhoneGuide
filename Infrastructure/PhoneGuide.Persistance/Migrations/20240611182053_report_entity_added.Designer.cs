@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PhoneGuide.Persistance.Contexts;
@@ -11,9 +12,10 @@ using PhoneGuide.Persistance.Contexts;
 namespace PhoneGuide.Persistance.Migrations
 {
     [DbContext(typeof(PhoneGuideDbContext))]
-    partial class PhoneGuideDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240611182053_report_entity_added")]
+    partial class report_entity_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

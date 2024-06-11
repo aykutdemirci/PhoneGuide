@@ -18,6 +18,7 @@ namespace PhoneGuide.Persistance
 
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

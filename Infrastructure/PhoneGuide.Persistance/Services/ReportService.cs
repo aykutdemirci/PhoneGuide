@@ -3,6 +3,7 @@ using PhoneGuide.Application.Abstractions.UnitOfWork;
 using PhoneGuide.Application.Dto.Report;
 using PhoneGuide.Domain.Entities.Enums;
 using PhoneGuide.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhoneGuide.Persistance.Services
 {
