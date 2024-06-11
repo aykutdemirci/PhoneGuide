@@ -6,6 +6,6 @@ namespace PhoneGuide.Application.Abstractions.Services
     {
         Task<bool> CreateAsync(DtoCreateReport dtoCreateReport);
 
-        Task<List<DtoCreateReport>> GetAllAsync();
+        Task<List<DtoDisplayReport>> GetAllAsync();
     }
 }

@@ -1,9 +1,8 @@
-﻿using PhoneGuide.Application.Abstractions.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneGuide.Application.Abstractions.Services;
 using PhoneGuide.Application.Abstractions.UnitOfWork;
 using PhoneGuide.Application.Dto.Report;
-using PhoneGuide.Domain.Entities.Enums;
 using PhoneGuide.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace PhoneGuide.Persistance.Services
 {
@@ -29,10 +28,11 @@ namespace PhoneGuide.Persistance.Services
             return added;
         }
 
-        public async Task<List<DtoCreateReport>> GetAllAsync()
+        public async Task<List<DtoDisplayReport>> GetAllAsync()
         {
-            return await _unitOfWork.ReportRepository.GetAll().Select(q => new DtoCreateReport
+            return await _unitOfWork.ReportRepository.GetAll().Select(q => new DtoDisplayReport
             {
+                Id = q.Id.ToString(),
                 RequestedDate = q.RequestedDate,
                 ReportStatus = q.ReportStatus,
             }).ToListAsync();
